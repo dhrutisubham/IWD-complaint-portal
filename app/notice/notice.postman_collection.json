@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "5710a8f0-e7bb-4900-be42-3bf0950ccfea",
+		"name": "Notice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30387953"
+	},
+	"item": [
+		{
+			"name": "Get Live Notice",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/api/notice"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Notice",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Notice 1\",\r\n    \"content\":\"hello\",\r\n    \"expiryDate\":\"2024-04-30T23:59:59Z\",\r\n    \"link\":\"https://example.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/notice"
+			},
+			"response": []
+		},
+		{
+			"name": "delete expired",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/api/notice/expired"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Notice",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/api/notice/5"
+			},
+			"response": []
+		}
+	]
+}

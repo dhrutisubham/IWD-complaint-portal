@@ -1,0 +1,27 @@
+{
+	"info": {
+		"_postman_id": "570811fc-a720-411a-9caf-9d8ce322d508",
+		"name": "Complaint",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30387953"
+	},
+	"item": [
+		{
+			"name": "Create Complaint",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:300/"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Complaints",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
