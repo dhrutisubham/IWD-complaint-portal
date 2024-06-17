@@ -10,15 +10,15 @@ export const Notice = sequelize.define("notice", {
     title: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
+    }, // subject
     content: {
         type: DataTypes.TEXT,
         allowNull: false,
-    },
+    }, // body
     expiryDate: {
         type: DataTypes.DATE,
         allowNull: false,
-    },
+    }, // remove
     link : {
         type: DataTypes.STRING,
         allowNull: false,

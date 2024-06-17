@@ -1,5 +1,10 @@
+import path from 'path'
+import { fileURLToPath } from 'url';
 import { config  as dotenvconf} from 'dotenv'
 dotenvconf()
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const config = {
     port : 3000,
@@ -9,6 +14,8 @@ const config = {
     adminPassword:process.env.ADMIN_PASSWORD,
     safetyToken: process.env.SAFETY_TOKEN,
     loginExpiry: 60 * 60 * 24 * 7,
+    noticeStaticDirPath: path.join(__dirname,'static','notices'),
+    complaintStaticDirPath: path.join(__dirname,'static','complaints'),
 }
 
 export default config;

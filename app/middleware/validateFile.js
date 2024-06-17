@@ -1,6 +1,6 @@
-export const validateBody = (schema) => {
+export const validateFile = (schema) => {
     return (req, res, next) => {
-        const { error, value } = schema.validate(req.body)
+        const { error, value } = schema.validate(req.file)
 
         if (error) {
             const errorMessage = error.details

@@ -5,13 +5,25 @@ import sequelize from "./core/db.js";
 import logger from './core/logger.js';
 import config from "./core/config.js";
 import cookieParser from 'cookie-parser'
+import { existsSync, mkdirSync } from 'fs';
 import complaintRouter from "./app/complaint/routes.js";
 import noticeRouter from "./app/notice/routes.js";
 import adminRouter from "./app/admin/routes.js";
+import validateAdmin from './app/middleware/validateAdmin.js';
+
 
 const app = express();
 
 const allowedOrigins = []
+
+// -----------DIRECTOR INITIALISATION----------
+if (!existsSync(config.noticeStaticDirPath)) {
+    mkdirSync(config.noticeStaticDirPath);
+}
+
+if (!existsSync(config.complaintStaticDirPath)) {
+    mkdirSync(config.complaintStaticDirPath);
+}
 
 // -----------MIDDLEWARE-------------
 app.use(
@@ -24,6 +36,8 @@ app.use(
 
 app.use(express.json())
 app.use(cookieParser())
+app.use('/static/notice',express.static(config.noticeStaticDirPath));
+app.use('/static/complaint',validateAdmin(),express.static(config.complaintStaticDirPath));
 
 morgan.token('pino-logger', (req, res) => {
     // all it does is print incoming http request
