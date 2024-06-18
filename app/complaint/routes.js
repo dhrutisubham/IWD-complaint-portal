@@ -6,14 +6,14 @@ import validateAdmin from "../middleware/validateAdmin.js";
 import { validateBody } from "../middleware/validateBody.js";
 import { createComplaint, getComplaints } from "./service.js";
 import { createComplaintFileSchema, createComplaintSchema } from "./schema.js";
-const upload = multer({dest: config.complaintStaticDirPath});
+// const upload = multer({dest: config.complaintStaticDirPath});
 const complaintRouter = Router();
 
 complaintRouter.get("",validateAdmin(), getComplaints);
 complaintRouter.post("", 
     // validateBody(createComplaintSchema), 
     // validateFile(createComplaintFileSchema),
-    upload.single('file'),
+    // upload.single('file'),
     createComplaint
 )
 

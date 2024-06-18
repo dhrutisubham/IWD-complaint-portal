@@ -16,6 +16,13 @@ const config = {
     loginExpiry: 60 * 60 * 24 * 7,
     noticeStaticDirPath: path.join(__dirname,'static','notices'),
     complaintStaticDirPath: path.join(__dirname,'static','complaints'),
+    allowedMimeTypes :{
+        complaints:[
+            'image/jpeg', 
+            'image/png', 
+            'application/pdf'
+        ]
+    }
 }
 
 export default config;
