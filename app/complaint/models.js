@@ -50,5 +50,6 @@ export const Complaint = sequelize.define("complaint", {
 });
 
 export const StatusChoices = {
-    PENDING: "pending"
+    PENDING: "pending",
+    RESOLVED: "resolved" 
 }

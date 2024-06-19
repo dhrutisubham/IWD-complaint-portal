@@ -1,20 +1,13 @@
-import multer from "multer";
 import { Router } from "express";
-import config from "../../core/config.js";
-import { validateFile } from "../middleware/validateFile.js"
 import validateAdmin from "../middleware/validateAdmin.js";
+import { changeStatus, createComplaint, getComplaints, getComplaintsByID } from "./service.js";
 import { validateBody } from "../middleware/validateBody.js";
-import { createComplaint, getComplaints } from "./service.js";
-import { createComplaintFileSchema, createComplaintSchema } from "./schema.js";
-// const upload = multer({dest: config.complaintStaticDirPath});
+import { changeComplaintStatusSchema } from "./schema.js";
 const complaintRouter = Router();
 
 complaintRouter.get("",validateAdmin(), getComplaints);
-complaintRouter.post("", 
-    // validateBody(createComplaintSchema), 
-    // validateFile(createComplaintFileSchema),
-    // upload.single('file'),
-    createComplaint
-)
+complaintRouter.get("/:id",getComplaintsByID);
+complaintRouter.post("", createComplaint);
+complaintRouter.patch("/:id/change-status", validateBody(changeComplaintStatusSchema), changeStatus);
 
 export default complaintRouter;

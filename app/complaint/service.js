@@ -79,10 +79,10 @@ export const createComplaint = async (req,res) => {
     req.pipe(bb);
 };
 
-//:TODO: add pagination and location and type filter
 export const getComplaints = async (req, res) => {
+    const DEFAULT_PAGE_SIZE = 10;
     try {
-        const { name, createdBefore, createdAfter, email, issue } = req.query;
+        const { name, createdBefore, createdAfter, email, subject, pageSize, pageNumber} = req.query;
 
         const filter = {};
         if (name) {
@@ -101,14 +101,79 @@ export const getComplaints = async (req, res) => {
             filter.issue = { [Op.like]: `%${issue}%` };
         }
 
+        const limit = pageSize ? parseInt(pageSize, 10) : DEFAULT_PAGE_SIZE; 
+        const page = pageNumber ? parseInt(pageNumber, 10) : 1; 
+        const offset = (page - 1) * limit;
+
         const complaints = await Complaint.findAll({
-            where: filter
+            attributes:[
+                'id',
+                'locationZone',
+                'status',
+                'issue',
+                'createdAt',
+                'issueType',
+                'fileName'
+            ],
+            where: filter,
+            limit: limit,
+            offset: offset
         });
 
         res.status(200).json({
             success: true,
-            complaints
+            page,
+            complaints,
         });
+    } catch (error) {
+        console.error('Error fetching complaints:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Internal server error'
+        });
+    }
+};
+
+export const getComplaintsByID = async (req, res) => {
+    try {
+        const id  = req.params.id;
+        const complaint = await Complaint.findByPk(id);
+
+        res.status(200).json({
+            success: true,
+            complaint,
+        });
+    } catch (error) {
+        console.error('Error fetching complaints:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Internal server error'
+        });
+    }
+};
+
+
+export const changeStatus = async (req, res) => {
+    try {
+        const {id,status} = req.body;
+
+        const [updatedRows] = await Complaint.update(
+            { status: status },
+            { where: { id: id } }
+        );
+
+        if (updatedRows === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Complaint not found or no changes made.'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Complaint status updated successfully.'
+        });
+
     } catch (error) {
         console.error('Error fetching complaints:', error);
         res.status(500).json({
