@@ -5,7 +5,7 @@ import { validateBody } from "../middleware/validateBody.js";
 import { changeComplaintStatusSchema } from "./schema.js";
 const complaintRouter = Router();
 
-complaintRouter.get("",validateAdmin(), getComplaints);
+complaintRouter.get("", getComplaints);
 complaintRouter.get("/:id",getComplaintsByID);
 complaintRouter.post("", createComplaint);
 complaintRouter.patch("/:id/change-status", validateBody(changeComplaintStatusSchema), changeStatus);
