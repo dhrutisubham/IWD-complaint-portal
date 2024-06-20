@@ -14,10 +14,15 @@ const config = {
     adminPassword:process.env.ADMIN_PASSWORD,
     safetyToken: process.env.SAFETY_TOKEN,
     loginExpiry: 60 * 60 * 24 * 7,
-    noticeStaticDirPath: path.join(__dirname,'static','notices'),
-    complaintStaticDirPath: path.join(__dirname,'static','complaints'),
+    noticeStaticDirPath: path.join(__dirname,'..','static','notices'),
+    complaintStaticDirPath: path.join(__dirname,'..','static','complaints'),
     allowedMimeTypes :{
         complaints:[
+            'image/jpeg', 
+            'image/png', 
+            'application/pdf'
+        ],
+        notices:[
             'image/jpeg', 
             'image/png', 
             'application/pdf'

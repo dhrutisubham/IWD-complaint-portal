@@ -7,21 +7,23 @@ export const Notice = sequelize.define("notice", {
         primaryKey: true,
         autoIncrement: true,
     },
-    title: {
+    subject: {
         type: DataTypes.STRING,
         allowNull: false,
-    }, // subject
-    content: {
+    },
+    body: {
         type: DataTypes.TEXT,
         allowNull: false,
-    }, // body
-    expiryDate: {
-        type: DataTypes.DATE,
-        allowNull: false,
-    }, // remove
+    },
     link : {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+        defaultValue:null
+    },
+    fileName:{
+        type:DataTypes.STRING,
+        allowNull:true,
+        defaultValue:null
     }
 });
 

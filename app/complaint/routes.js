@@ -8,6 +8,6 @@ const complaintRouter = Router();
 complaintRouter.get("", getComplaints);
 complaintRouter.get("/:id",getComplaintsByID);
 complaintRouter.post("", createComplaint);
-complaintRouter.patch("/:id/change-status", validateBody(changeComplaintStatusSchema), changeStatus);
+complaintRouter.patch("/:id/change-status",validateAdmin(), validateBody(changeComplaintStatusSchema), changeStatus);
 
 export default complaintRouter;

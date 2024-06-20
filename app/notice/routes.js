@@ -1,17 +1,13 @@
 import { Router } from "express";
-import { createNotice, deleteExpiredNotices, deleteNoticeById, getAllNotices, getNotices } from "./service.js";
-import { createNoticeSchema } from "./schema.js";
-import { validateBody } from "../middleware/validateBody.js";
 import validateAdmin from "../middleware/validateAdmin.js";
+import { createNotice, deleteNoticeById, getAllNotices, getNoticeById } from "./service.js";
 
 
 const noticeRouter = Router();
 
-// :TODO: add admin auth
-noticeRouter.get("", getNotices);
-noticeRouter.get("/all",validateAdmin(),getAllNotices);
-noticeRouter.post("", validateBody(createNoticeSchema), createNotice)
-noticeRouter.delete("/expired",deleteExpiredNotices);
+noticeRouter.get("",getAllNotices);
+noticeRouter.get("/:id",getNoticeById);
+noticeRouter.post("", validateAdmin(), createNotice)
 noticeRouter.delete("/:id",validateAdmin(),deleteNoticeById);
 
 export default noticeRouter;

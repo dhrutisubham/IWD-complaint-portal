@@ -175,7 +175,7 @@ export const changeStatus = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Error fetching complaints:', error);
+        logger.error('Error fetching complaints:', error);
         res.status(500).json({
             success: false,
             error: 'Internal server error'
