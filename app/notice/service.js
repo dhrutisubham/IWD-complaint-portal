@@ -145,8 +145,10 @@ export const deleteNoticeById = async (req, res) => {
         await notice.destroy();
 
         try {
-            await fsPromises.unlink(filePath);
-            console.log(`File deleted: ${filePath}`);
+            if(filePath){
+                await fsPromises.unlink(filePath);
+                console.log(`File deleted: ${filePath}`);
+            }
         } catch (err) {
             if (err.code === 'ENOENT') {
                 console.error(`File not found: ${filePath}`);
