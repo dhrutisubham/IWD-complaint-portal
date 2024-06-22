@@ -14,7 +14,7 @@ import validateAdmin from './app/middleware/validateAdmin.js';
 
 const app = express();
 
-const allowedOrigins = ["https://iwd-frontend.netlify.app"]
+const allowedOrigins = ["https://iwd-frontend.netlify.app", "http://localhost:3000"]
 
 // -----------DIRECTOR INITIALISATION----------
 if (!existsSync(config.noticeStaticDirPath)) {
