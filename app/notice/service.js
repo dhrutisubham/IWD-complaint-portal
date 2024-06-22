@@ -141,11 +141,11 @@ export const deleteNoticeById = async (req, res) => {
             return res.status(404).json({ success: false, error: 'Notice not found' });
         }
 
-        const filePath = path.join(config.noticeStaticDirPath,notice.fileName);
         await notice.destroy();
-
+        
         try {
-            if(filePath){
+            if(fileName){
+                const filePath = path.join(config.noticeStaticDirPath,notice.fileName);
                 await fsPromises.unlink(filePath);
                 console.log(`File deleted: ${filePath}`);
             }
