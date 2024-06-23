@@ -14,7 +14,7 @@ import validateAdmin from './app/middleware/validateAdmin.js';
 
 const app = express();
 
-const allowedOrigins = []
+const allowedOrigins = ['http://localhost:5173']
 
 // -----------DIRECTOR INITIALISATION----------
 if (!existsSync(config.noticeStaticDirPath)) {
