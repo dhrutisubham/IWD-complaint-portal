@@ -14,7 +14,7 @@ import validateAdmin from './app/middleware/validateAdmin.js';
 
 const app = express();
 
-const allowedOrigins = []
+const allowedOrigins = ["https://iwd-frontend.netlify.app", "http://localhost:5173"]
 
 // -----------DIRECTOR INITIALISATION----------
 if (!existsSync(config.noticeStaticDirPath)) {
@@ -37,7 +37,7 @@ app.use(
 app.use(express.json())
 app.use(cookieParser())
 app.use('/static/notice',express.static(config.noticeStaticDirPath));
-app.use('/static/complaint',validateAdmin(),express.static(config.complaintStaticDirPath));
+app.use('/static/complaint',express.static(config.complaintStaticDirPath));
 
 morgan.token('pino-logger', (req, res) => {
     // all it does is print incoming http request
