@@ -116,8 +116,8 @@ export const getComplaints = async (req, res) => {
                 'fileName'
             ],
             where: filter,
-            limit: limit,
-            offset: offset
+            // limit: limit,
+            // offset: offset
         });
 
         res.status(200).json({
